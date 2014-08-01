@@ -106,7 +106,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
     # You may also specify custom JSON attributes:
     json_file = File.expand_path("../chef.json", __FILE__)
-    chef.json = JSON.parse IO.read(json_file)
+    run_list = {
+      "run_list": [
+        "recipe[java]",
+        "recipe[elasticsearch]",
+        "recipe[elasticsearch::aws]"
+      ]
+    }
+    chef_json = JSON.parse IO.read(json_file)
+    chef.json = chef_json.merge run_list
 
     # Configure Chef output
     chef.formatter = ENV.fetch("CHEF_FORMAT", "null").downcase.to_sym

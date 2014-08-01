@@ -110,7 +110,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       "run_list": [
         "recipe[java]",
         "recipe[elasticsearch]",
-        "recipe[elasticsearch::aws]"
+        "recipe[elasticsearch::aws]",
+        "recipe[elasticsearch::search_discovery]"
       ]
     }
     chef_json = JSON.parse IO.read(json_file)

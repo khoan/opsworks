@@ -1,0 +1,24 @@
+{
+  "java": {
+    "jdk_version": "7",
+    "install_flavor" : "oracle",
+    "oracle" : { "accept_oracle_download_terms" : "true" },
+    "accept_license_agreement" : "true"
+  },
+
+  "elasticsearch": {
+    "version" : "1.2.1",
+    "cluster" : { "name" : "issue-elasticsearch" },
+    "plugins" : {
+      "elasticsearch/elasticsearch-cloud-aws" : {
+        "version" : "2.2.0"
+      }
+    }
+  },
+
+  "run_list": [
+    "recipe[java]",
+    "recipe[elasticsearch]",
+    "recipe[elasticsearch::aws]"
+  ]
+}

@@ -105,7 +105,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   chef.add_role "web"
   #
     # You may also specify custom JSON attributes:
-    json_file = File.expand_path("../chef.json", __FILE__)
+    custom_json_file = File.expand_path("../custom.json", __FILE__)
     run_list = {
       "run_list": [
         "recipe[java]",
@@ -114,7 +114,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "recipe[elasticsearch::search_discovery]"
       ]
     }
-    chef_json = JSON.parse IO.read(json_file)
+    chef_json = JSON.parse IO.read(custom_json_file)
     chef.json = chef_json.merge run_list
 
     # Configure Chef output

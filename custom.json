@@ -1,0 +1,39 @@
+{
+  "java": {
+    "jdk_version": "7",
+    "install_flavor" : "oracle",
+    "oracle" : { "accept_oracle_download_terms" : "true" },
+    "accept_license_agreement" : "true"
+  },
+
+  "elasticsearch": {
+    "version" : "1.2.1",
+    "cluster" : { "name" : "issue-elasticsearch" },
+    "path" : {
+      "data" : "/data/db/elasticsearch",
+      "logs" : "/data/log/elasticsearch"
+    },
+    /*
+    "discovery" : {
+      "type" : "ec2"
+    },
+    "cloud" : {
+      "aws" : {
+        "access_key" : "",
+        "secret_key" : ""
+      },
+      "ec2" : {
+        "security_group" : "elasticsearch"
+      }
+    },
+    "custom_config" : {
+      "cluster.routing.allocation.awareness.attributes" : "region"
+    },
+    */
+    "plugins" : {
+      "elasticsearch/elasticsearch-cloud-aws" : {
+        "version" : "2.2.0"
+      }
+    }
+  }
+}

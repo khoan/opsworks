@@ -33,6 +33,9 @@
     "plugins" : {
       "elasticsearch/elasticsearch-cloud-aws" : {
         "version" : "2.2.0"
+      },
+      "marvel" : {
+        "url" : "https://download.elasticsearch.org/elasticsearch/marvel/marvel-latest.zip"
       }
     }
   }

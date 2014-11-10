@@ -47,7 +47,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   config.vm.provider "virtualbox" do |vb|
     # Don't boot with headless mode
-    vb.gui = true
+    #vb.gui = true
   
     # Use VBoxManage to customize the VM. For example to change memory:
     vb.customize [ "modifyvm", :id,
@@ -107,11 +107,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # You may also specify custom JSON attributes:
     custom_json_file = File.expand_path("../custom.json", __FILE__)
     run_list = {
-      "run_list": [
+      "run_list" => [
         "recipe[java]",
         "recipe[elasticsearch]",
         "recipe[elasticsearch::aws]",
-        "recipe[elasticsearch::search_discovery]"
+        "recipe[elasticsearch::plugins]",
+        #"recipe[elasticsearch::search_discovery]"
       ]
     }
     chef_json = JSON.parse IO.read(custom_json_file)

@@ -30,6 +30,7 @@
         }
       ],
       "allow_cluster_api" : true,
+      "port" : "443",
       "ssl" : {
         "key_file" : "/etc/ssl/privatekey.pem",
         "cert_file" : "/etc/ssl/server.crt",

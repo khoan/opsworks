@@ -3,15 +3,41 @@
     "jdk_version": "7",
     "install_flavor" : "oracle",
     "oracle" : { "accept_oracle_download_terms" : "true" },
-    "accept_license_agreement" : "true"
+    "accept_license_agreement" : "true",
+    "arch" : "x86_64",
+    "jdk" : {
+      "7" : {
+        "x86_64" : {
+          "url" : "https://s3.amazonaws.com/opsworks.issue.by/jdk-7u75-linux-x64.tar.gz",
+          "checksum" : "cef77f13bac96eb472c02fac0da6cbcf"
+        }
+      }
+    }
   },
 
   "elasticsearch": {
-    "version" : "1.2.1",
+    "version" : "1.3.8",
     "cluster" : { "name" : "issue-elasticsearch" },
     "path" : {
       "data" : "/data/db/elasticsearch",
       "logs" : "/data/log/elasticsearch"
+    },
+    "nginx" : {
+      "ssl" : {
+        "key_file" : "/etc/ssl/privatekey.pem",
+        "cert_file" : "/etc/ssl/server.crt",
+        "key" : "-----BEGIN RSA PRIVATE KEY-----\\nMIIEpAIBAAKCAQEAv+Fjl4BZXn8z1HDmqVGOeXmfevS5s14uXb6458G2GxaqKber\\nBdYTDrKw78/cw0a1jbInob/ase2mdNdH0MNhYkJEGA8/rjvRa6eoAAveVpXaAMtG\\nNXijTK3rmLvbyCLMEwjmRBCFh9s8/hPPQbqXzh20Oi8QemNm4kGxuyr2fYgkbtj+\\ntXe95MNpfarGDYbPVyafbeEXhfcs53RF/cIfP7WINPTCJaUTkHLcYKFxF8VolcKR\\nK2Ydgx1QDizY5qhFqnYEOg4O6pPBAR2ZZYobZjinogDgaE4biRdMyZbINIAyVyN2\\nwdKlHjOveY+imVsOUToc0KKmySsk1tdUWwbv3QIDAQABAoIBAC2QDaAKAC6qMdp+\\nPKd0EErUEISX3Ai1knj8MtgFbYKdLSbe0COAo+HXmKA5UYilH7NX3IVSE1Iwxlf0\\nTr9JxbQZXCYCaPKsjZvsob3xE4in6K5Llo5X6R7qJYmNAjFR4febI2KCMdMCwkbq\\n2UoYTrfI4eT3DAij1ehgBR4Wo5VG9wQqwaoSVYnnrWtK7dznQK9IYVswMaKfVd5J\\n6skvwlO0P+YZOQwTGkOnCvuwTIqZABRV6tYIXNWjRcmi0PdbISAeQy7hCmLH7uym\\nH6UyWU+ZelgbZmF66EIbuRqqdSx+ITfkK0gDTTiBsLMBdfETLZU2hI8g+61ZhLc+\\ncITZKgECgYEA8ioysqC4XLefbv6zZaREUDexwEefsyVemLHugd2xnHL/fBjozhUN\\nblk551VKgoI8P2S2taS/FAAKFc09A8JKDcbMW6gdoJ/szbg9wbv5ktl0elzZu4Fp\\nGTrkEd1Q1EGtmY3wGKCfQwO8KJw+Ff5hPALtx3Afkz1yZU4dAPB/fR0CgYEAytfA\\njgAWA3A85Tnm8K7szBGWfFKtwNj/Ft0fOuDi4r8t8Z5p3avIRFgAwJ8btP5EH8r9\\nENvYcI6OQKeC2w+0cWl60cacBRQIJMpjFAvWxJgrfF7A+sZNPhomzoJGSNl3ut7k\\na3OTCbxB4QA5OFaGKjXArIlh1Vuqw6rC0W/2gcECgYEAnUNKKTa2g3+7yhkd56QF\\nuRJyHKxmybA6/m6OtUeDUFZeE/kZNrv1PPQ05kY9XQO2nHSLMusKK7La2c2vEgHa\\nlZfEnsFOfEFfRzme4XFxYixVuCEURPCFkBzuf6t6El2Un2PNyDCHPL3wM29D4oSQ\\nIKjGQf5OgxAkeiWAMFv+bwECgYACyrFlwu6KoZLU/NUG3wF3VY6iq2ikzNfF8skp\\nQEsfH858EtgWKvUYq7Vm8UmqVg2N+nc9MilqcyvWC/grF64+GVuNY5RmJX5vMzHl\\n5rvP/OAsWAmD6hLKFgYOtZBOFGAnfEXcjLyrV6H4fM5MzjQOhKrgNQvZqedRxhnk\\nVAwqgQKBgQCv2+R1o4sXd1urEfoUU+hjSA534q16AS9q1iONvZtCDL5pLvKE+Ptv\\nXI976cOJwiMCL/H77KY/FuMgjXGxLvxMjPXiN4f5sJEfWwElXnZMpiiXSFc/id3D\\n3yyb4RzMUdU6pC6cwqiO+yasXPNwm5ha7Rgamjvbcj48xVMVT9NbLw==\\n-----END RSA PRIVATE KEY-----",
+        "cert" : "-----BEGIN CERTIFICATE-----\\nMIIDBjCCAe4CCQDfKEtrzIQo+TANBgkqhkiG9w0BAQUFADBFMQswCQYDVQQGEwJB\\nVTETMBEGA1UECBMKU29tZS1TdGF0ZTEhMB8GA1UEChMYSW50ZXJuZXQgV2lkZ2l0\\ncyBQdHkgTHRkMB4XDTE1MDMxNTE5MjUyOFoXDTI1MDMxMjE5MjUyOFowRTELMAkG\\nA1UEBhMCQVUxEzARBgNVBAgTClNvbWUtU3RhdGUxITAfBgNVBAoTGEludGVybmV0\\nIFdpZGdpdHMgUHR5IEx0ZDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB\\nAL/hY5eAWV5/M9Rw5qlRjnl5n3r0ubNeLl2+uOfBthsWqim3qwXWEw6ysO/P3MNG\\ntY2yJ6G/2rHtpnTXR9DDYWJCRBgPP6470WunqAAL3laV2gDLRjV4o0yt65i728gi\\nzBMI5kQQhYfbPP4Tz0G6l84dtDovEHpjZuJBsbsq9n2IJG7Y/rV3veTDaX2qxg2G\\nz1cmn23hF4X3LOd0Rf3CHz+1iDT0wiWlE5By3GChcRfFaJXCkStmHYMdUA4s2Oao\\nRap2BDoODuqTwQEdmWWKG2Y4p6IA4GhOG4kXTMmWyDSAMlcjdsHSpR4zr3mPoplb\\nDlE6HNCipskrJNbXVFsG790CAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAVexCp5gG\\nQWFYrMB5hTvTrbXR3S2mtP8F1COjI1NHFbjMEQgVDM9ZwG4wuYRtFKafeUkFTz0O\\ncLw2ezmFQ75ly/BRIFkq00Z7qUJny+ri5xFCHYeKqOKYKuj4/iYuhxgg6Z1AH3vp\\n+A53tXJfdWwLUelDLKXEprBc4C3844Te1u/CH6KlQTj17ZLQmsii8z5k7+fJLKFB\\nPGm7+qFKljGGPu/G2xZ0cqyuIlI94nXJvtozw1mWhC1O4PY28RFtfd/Ejzc2OS4T\\nJWRgM45LwOZ0gjutLmriN5KUvV6VYStdB8/238Q/+MbJLAdnqyZx/i0B6E5ioBos\\nPTTxf2TRw2gRTA==\\n-----END CERTIFICATE-----"
+      },
+      /*
+      "users" : [
+        {
+          "username" : "UndEcIphErAblE",
+          "password" : "zOm3th1ngHa8dt*g&#ZZ"
+        }
+      ],
+      */
+      "allow_cluster_api" : true
     },
     /*
     "discovery" : {

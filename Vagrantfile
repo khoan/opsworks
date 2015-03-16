@@ -50,10 +50,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #vb.gui = true
   
     # Use VBoxManage to customize the VM. For example to change memory:
-    vb.customize [ "modifyvm", :id,
-                   "--nictype1", "Am79C973",
-                   "--memory", "1024"
-                 ]
+    #vb.customize [ "modifyvm", :id,
+    #               "--nictype1", "Am79C973",
+    #               "--memory", "1024"
+    #             ]
   end
   #
   # View the documentation for the provider you're using for more
@@ -91,7 +91,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # https://github.com/berkshelf/vagrant-berkshelf
   # vagrant plugin install vagrant-berkshelf
-  config.berkshelf.enabled = true
+  #config.berkshelf.enabled = true
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
   # path, and data_bags path (all relative to this Vagrantfile), and adding
@@ -108,15 +108,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     custom_json_file = File.expand_path("../custom.json", __FILE__)
     run_list = {
       "run_list" => [
-        "recipe[java]",
-        "recipe[elasticsearch]",
-        "recipe[elasticsearch::aws]",
-        "recipe[elasticsearch::plugins]",
-        #"recipe[elasticsearch::search_discovery]"
+        "recipe[issue-elastic]"
       ]
     }
-    chef_json = JSON.parse IO.read(custom_json_file)
-    chef.json = chef_json.merge run_list
+    chef_json = JSON.parse(IO.read(custom_json_file))
+    chef.json = chef_json.merge(run_list)
 
     # Configure Chef output
     chef.formatter = ENV.fetch("CHEF_FORMAT", "null").downcase.to_sym

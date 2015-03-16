@@ -1,13 +1,13 @@
 file node.elasticsearch[:nginx][:ssl][:key_file] do
-  owner 'root'
-  group 'root'
+  owner node.elasticsearch[:nginx][:user]
+  group  node.elasticsearch[:nginx][:user]
   mode '0440'
   content node.elasticsearch[:nginx][:ssl][:key]
 end
 
 file node.elasticsearch[:nginx][:ssl][:cert_file] do
-  owner 'root'
-  group 'root'
+  owner node.elasticsearch[:nginx][:user]
+  group  node.elasticsearch[:nginx][:user]
   mode '0440'
   content node.elasticsearch[:nginx][:ssl][:cert]
 end

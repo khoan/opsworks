@@ -2,7 +2,7 @@
 
 1. berks install
 1. vagrant up
-1. curl 10.11.12.13:8080
+1. curl -k https://10.11.12.13
 
 ## troubleshoot
 

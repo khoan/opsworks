@@ -27,6 +27,8 @@ GRAPH
     monit (>= 0.0.0)
     xml (>= 0.0.0)
   issue-elastic (0.0.1)
+    elasticsearch (>= 0.0.0)
+    java (>= 0.0.0)
   java (1.31.0)
   monit (0.7.5)
   windows (1.36.6)

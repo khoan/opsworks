@@ -1,7 +1,7 @@
 name         'issue-elastic'
 version      '0.1.0'
-issues_url   'https://github.com/khoan/opsworks/issues'
-source_url   'https://github.com/khoan/opsworks'
+#issues_url   'https://github.com/khoan/opsworks/issues'
+#source_url   'https://github.com/khoan/opsworks'
 supports     'ubuntu', '= 14.04'
 
 

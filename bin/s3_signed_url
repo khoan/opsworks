@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+
+# simple ruby utility to generate query string authentication for S3 assets
+#
+# based on REST Authentication Example 3: Query String Authentication Example
+# http://s3.amazonaws.com/doc/s3-developer-guide/RESTAuthentication.html
+
+require 'base64'
+require 'openssl'
+require 'cgi'
+
+S3Host = 'https://s3.amazonaws.com'
+
+usage = ->(key) {
+  puts "missing #{key}"
+  puts ""
+  puts "  usage: path=quotes/nelson key=44CF9590006BF252F707 secret=OtxrzxIsfpFjA7SwPzILwy8Bw21TLhquhboDYROV bin/s3_signed_url"
+  puts "  > https://s3.amazonaws.com/quotes/nelson?AWSAccessKeyId=44CF9590006BF252F707&Expires=1141889120&Signature=vjbyPxybdZaNmGa%2ByT272YEAiv4%3D"
+  exit
+}
+
+path = ENV.fetch('path', &usage)
+key = ENV.fetch('key', &usage)
+secret = ENV.fetch('secret', &usage)
+
+years = 10
+expiry_time = Time.now.to_i + years*365*24*60*60
+#expiry_time = 1141889120
+digest = OpenSSL::Digest.new('sha1')
+
+path = path.sub(%r{^/?}, '/')
+data="GET\n\n\n#{expiry_time}\n#{path}"
+
+hmac = OpenSSL::HMAC.digest(digest, secret, data)
+base64_hmac = Base64.encode64(hmac).strip
+signature = CGI::escape(base64_hmac)
+
+puts "#{S3Host}#{path}?AWSAccessKeyId=#{key}&Expires=#{expiry_time}&Signature=#{signature}"

@@ -91,7 +91,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # https://github.com/berkshelf/vagrant-berkshelf
   # vagrant plugin install vagrant-berkshelf
-  #config.berkshelf.enabled = true
+  config.berkshelf.enabled = true
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
   # path, and data_bags path (all relative to this Vagrantfile), and adding

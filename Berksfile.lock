@@ -5,7 +5,7 @@ DEPENDENCIES
     tag: v0.9.0
   elasticsearch
     git: git://github.com/issueapp/cookbook-elasticsearch.git
-    revision: a291cb8cf9c0ee9fdaeb4c1f4cbc9c41bc4a0dd7
+    revision: 6e128e24feb1d6a117bd692113675cb582a75815
     branch: 0.3.x
   issue-elastic
     path: .

@@ -87,7 +87,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # https://github.com/schisamo/vagrant-omnibus
   # vagrant plugin install vagrant-omnibus
-  config.omnibus.chef_version = "11.10.4"
+  config.omnibus.chef_version = "12.5.1"
 
   # https://github.com/berkshelf/vagrant-berkshelf
   # vagrant plugin install vagrant-berkshelf

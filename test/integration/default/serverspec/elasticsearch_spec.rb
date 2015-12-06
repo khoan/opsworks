@@ -3,7 +3,13 @@ require 'serverspec'
 set :backend, :exec
 
 describe 'Elasticsearch' do
-  it 'is listening on port 9200'
+  describe port(9200) do
+    it { should be_listening }
+  end
+
+  it 'is listening on port 9200' do
+  end
+
   it 'is listening on port 9300'
   it 'is run as a service'
 

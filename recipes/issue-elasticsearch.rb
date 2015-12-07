@@ -1,4 +1,4 @@
-#include_recipe 'apt'
+include_recipe 'apt'
 
 include_recipe 'java'
 
@@ -45,7 +45,7 @@ elasticsearch_configure 'elasticsearch' do
 end
 
 elasticsearch_service 'elasticsearch' do
-  action :start
+  service_actions([:enable, :start])
 end
 
 # FIXME access control with nginx

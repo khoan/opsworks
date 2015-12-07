@@ -5,11 +5,14 @@ describe 'Elasticsearch' do
     it { should be_listening }
   end
 
-  it 'is listening on port 9200' do
+  describe port(9300) do
+    it { should be_listening }
   end
 
-  it 'is listening on port 9300'
-  it 'is run as a service'
+  describe service('elasticsearch') do
+    it { should be_enabled }
+    it { should be_running }
+  end
 
   it 'is 1.7.3 version'
 

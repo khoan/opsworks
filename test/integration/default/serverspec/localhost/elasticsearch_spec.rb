@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'json'
 
 describe 'Elasticsearch' do
   describe port(9200) do
@@ -14,11 +15,34 @@ describe 'Elasticsearch' do
     it { should be_running }
   end
 
-  it 'is 1.7.3 version'
+  describe command('curl localhost:9200') do
+    it 'is version 1.7.3' do
+      hash = JSON.parse(subject.stdout)
+      expect(hash['version']['number']).to eq '1.7.3'
+    end
+  end
 
-  describe 'Plugin' do
-    it 'has aws cloud 2.7.1 plugin'
-    it 'has marvel 1.3.1 plugin'
+  describe command('curl localhost:9200/_nodes') do
+    let(:plugins) do
+      hash = JSON.parse(subject.stdout)
+      hash['nodes'].values.first['plugins']
+    end
+
+    it 'has aws cloud 2.7.1 plugin' do
+      expect(plugins).to satisfy {|plugins|
+        plugins.any? do |plugin|
+          plugin['name'] == 'cloud-aws' && plugin['version'] == '2.7.1'
+        end
+      }
+    end
+
+    it 'has marvel 1.3.1 plugin' do
+      expect(plugins).to satisfy {|plugins|
+        plugins.any? do |plugin|
+          plugin['name'] == 'marvel' && plugin['version'] == '1.3.1'
+        end
+      }
+    end
   end
 
   describe 'Configuration' do

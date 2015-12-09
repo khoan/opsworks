@@ -11,13 +11,16 @@ platforms:
   - name: ubuntu/trusty64
 
 suites:
-  - name: default
+  - name: elasticsearch
     run_list:
       - recipe[issue-elastic::issue-elasticsearch]
-      #- recipe[issue-elastic::issue-elasticsearch-monitoring]
       #- recipe[issue-elastic::issue-elasticsearch-gate]
     attributes:
       issue:
         aws_access_key: 1234
         aws_secret_key: 1234
         elasticsearch_monitoring_cluster: "https://bam:bam@es-mon:9200"
+
+  - name: elasticsearch_monitoring
+    run_list:
+      - recipe[issue-elastic::issue-elasticsearch-monitoring]

@@ -2,6 +2,9 @@ require 'spec_helper'
 require 'json'
 
 describe 'Elasticsearch' do
+  # TODO
+  # tuning JVM
+
   describe port(9200) do
     it { should be_listening }
   end
@@ -22,6 +25,7 @@ describe 'Elasticsearch' do
     end
   end
 
+  # Plugins
   describe command('curl localhost:9200/_nodes') do
     let(:plugins) do
       hash = JSON.parse(subject.stdout)
@@ -45,16 +49,54 @@ describe 'Elasticsearch' do
     end
   end
 
-  describe 'Configuration' do
-    it 'exports node stats to monitoring cluster'
-    it 'exports node stats to monitoring cluster via https'
-    it 'clusters within elasticsearch group'
-    it 'supports CORS requests'
+  # cluster settings: discovery, CORS, data & log mount point
+  describe command('curl localhost:9200/_nodes') do
+    let(:settings) do
+      hash = JSON.parse(subject.stdout)
+      hash['nodes'].values.first['settings']
+    end
 
-    it 'stores data at /data/db/elasticsearch'
-    it 'stores log at /data/log/elasticsearch'
+    it 'clusters within elasticsearch group' do
+      expect(settings).to include(
+        'discover' => {'type' => 'ec2'},
+        'cloud' => {
+          'ec2' => {
+            'security_group' => 'elasticsearch'
+          }
+        }
+      )
+    end
 
-    # TODO
-    # tuning JVM
+    it 'supports CORS requests' do
+      expect(settings['http']).to include(
+        'cors' => {
+          'enabled' => 'true',
+          'allow-origin' => '/.*/',
+          'allow-headers' => 'X-Requested-With, Content-Type, Content-Length, Authorization',
+          'allow-credentials' => 'true',
+        }
+      )
+    end
+
+    it 'stores data at /data/db/elasticsearch' do
+      expect(settings['path']['data']).to eq '/data/db/elasticsearch'
+    end
+
+    it 'stores log at /data/log/elasticsearch' do
+      expect(settings['path']['logs']).to eq '/data/log/elasticsearch'
+    end
+  end
+
+  describe file('/etc/elasticsearch/elasticsearch.yml') do
+    it { should be_file }
+
+    # exports node stats to monitoring cluster
+    its(:content) { should match %r{marvel.agent.exporter.es.hosts:\s+https://bam:bam@es-mon:9200} }
+
+    # skips monitoring cluster hostname verification
+    its(:content) { should match %r{marvel.agent.exporter.es.ssl.hostname_verification:\s+false} }
+
+    # exports node stats to monitoring cluster via https
+    #its(:content) { }
   end
 end

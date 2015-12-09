@@ -1,8 +1,9 @@
 # development
 
-1. berks
-1. vagrant up
-1. curl -k https://abc:abc@10.11.12.13
+1. kitchen list
+1. kitchen create
+1. kitchen converge
+1. kitchen verify
 
 ## dependencies
 

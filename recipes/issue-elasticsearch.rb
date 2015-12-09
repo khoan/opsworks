@@ -32,15 +32,14 @@ elasticsearch_configure 'elasticsearch' do
     'http.cors.allow-headers' => 'X-Requested-With, Content-Type, Content-Length, Authorization',
     'http.cors.allow-credentials' => true,
 
-    #'discover.type' => 'ec2',
-    #'cloud.aws.access_key' => '12345',
-    #'cloud.aws.secret_key' => '12345',
-    #'cloud.ec2.security_group' => 'elasticsearch',
+    'discover.type' => 'ec2',
+    'cloud.aws.access_key' => node.issue.aws_secret_key,
+    'cloud.aws.secret_key' => node.issue.aws_secret_key,
+    'cloud.ec2.security_group' => 'elasticsearch',
+    #'cloud.ec2.groups' => 'elasticsearch',
 
-    #'marvel.agent.exporter.es.hosts' => [
-    #  'https://bam:bam@es-mon:9200'
-    #],
-    #'marvel.agent.exporter.es.ssl.hostname_verification' => false
+    'marvel.agent.exporter.es.hosts' => node.issue.elasticsearch_monitoring_cluster,
+    'marvel.agent.exporter.es.ssl.hostname_verification' => false
   )
 end
 

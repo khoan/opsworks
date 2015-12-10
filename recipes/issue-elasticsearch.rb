@@ -39,7 +39,6 @@ elasticsearch_configure 'elasticsearch' do
     #'cloud.ec2.groups' => 'elasticsearch',
 
     'marvel.agent.exporter.es.hosts' => node.issue.elasticsearch_monitoring_cluster,
-    'marvel.agent.exporter.es.ssl.hostname_verification' => false
   )
 end
 

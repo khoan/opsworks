@@ -21,7 +21,7 @@ elasticsearch_configure 'elasticsearch' do
   )
 
   configuration(
-    'cluster.name' => 'issue-elasticsearch',
+    'cluster.name' => 'issue-elasticsearch-monitoring',
 
     'http.cors.enabled' => true,
     'http.cors.allow-origin' => '/.*/',

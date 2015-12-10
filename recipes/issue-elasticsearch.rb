@@ -44,5 +44,5 @@ elasticsearch_configure 'elasticsearch' do
 end
 
 elasticsearch_service 'elasticsearch' do
-  service_actions([:enable, :start])
+  service_actions([:enable, :restart])
 end

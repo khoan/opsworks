@@ -1,3 +1,4 @@
+# wait_for /data
 bash 'wait until /data is mounted' do
   code <<-CODE
     while ( ! grep -qs /data /proc/mounts )

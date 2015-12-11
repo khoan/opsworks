@@ -1,5 +1,4 @@
 include_recipe 'apt'
-
 include_recipe 'java'
 
 elasticsearch_user 'elasticsearch'
@@ -10,15 +9,8 @@ elasticsearch_plugin 'marvel' do
 end
 
 elasticsearch_configure 'elasticsearch' do
-  path_data(
-    package: '/data/db/elasticsearch',
-    tarball: '/data/db/elasticsearch'
-  )
-
-  path_logs(
-    package: '/data/log/elasticsearch',
-    tarball: '/data/log/elasticsearch'
-  )
+  path_data(package: '/data/db/elasticsearch')
+  path_logs(package: '/data/log/elasticsearch')
 
   configuration(
     'cluster.name' => 'issue-elasticsearch-monitoring',

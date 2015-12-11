@@ -1,5 +1,5 @@
 DEPENDENCIES
-  issue-elastic
+  idata
     path: .
     metadata: true
 
@@ -13,14 +13,15 @@ GRAPH
   bluepill (2.4.1)
     rsyslog (~> 2.0)
   build-essential (2.2.4)
-  chef-sugar (3.1.1)
+  chef-sugar (3.2.0)
   chef_handler (1.2.0)
   elasticsearch (2.1.0)
     apt (>= 0.0.0)
     ark (>= 0.0.0)
     chef-sugar (>= 0.0.0)
     yum (>= 0.0.0)
-  issue-elastic (0.2.0)
+  idata (0.3.0)
+    apt (>= 0.0.0)
     elasticsearch (>= 0.0.0)
     java (>= 0.0.0)
     nginx (>= 0.0.0)

@@ -13,18 +13,18 @@ platforms:
 suites:
   - name: monitor
     run_list:
-      - recipe[issue-elastic::issue-elasticsearch-monitoring]
+      - recipe[idata::monitor]
 
   - name: elasticsearch
     run_list:
-      - recipe[issue-elastic::issue-elasticsearch]
-      - recipe[issue-elastic::issue-elasticsearch-gate]
+      - recipe[idata::elasticsearch]
+      - recipe[idata::gate]
     attributes:
-      issue:
-        user: bam
-        pass: bam
-        aws_access_key: 1234
-        aws_secret_key: 1234
-        elasticsearch_monitoring_cluster: "http://localhost:9200/monitor"
+      idata:
+        user: ubam
+        pass: pbam
+        aws_access_key: a1234
+        aws_secret_key: s5678
+        monitor_url: "http://localhost:9200/monitor"
         ssl_key: "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEAz/yJ4qWRjWXMjvmhZKeDuf7YUZzyEgxTtT16+/delIxghcLj\nMAPlMmvsiHEC1/Secaiw1kc39jioUDK6UBLLLaLGaDPSKrWa8TK5OTdpcwV84LYX\n0G47q1ODeEuA7UzvRc1+HjZQCytBU/TZpC9uA4UWzgUFsqHYyxOrxLg4wfHP9Qi2\nq+QxSLKVwtEI10bKhaU6cJD2+SvLc3BAMN727fsF3AzCSiu6IS0WfQB4HXQwkuOn\nIFQmrF2f6wfJKeRpXMdpuLK4C9CwkGyp3Y9YeeFx5oyNkPpIaD2e3BriNQTLM6ba\nihr1S9Hx9TrB9TXJegPDdiSyV9S1JvXCcFkeowIDAQABAoIBADWiJdxwXaxcx/dG\noDvYhrt74ESLeFD3JM7j38cB7z3XRTy5GOTU3FG4SvKUUetmhUVB/vgCvYec7Kph\nqnHjpslJ5GgSlOu2kRIJxoHerC6hB6baziFNi82OZ6Sps8F9yWXyq8cWsmVu7hW8\nWjNgl7oIo+zUlreNzN3xYKYF63z3a09eP+fo9Cnk7gV1I02dTc7lAb4NVhjifn3v\nWhgN2KovFzXNYKcwzAln3GfDh8Izcl1LuAi7Ux7/5DtW4T9SsBC4fG0pHq7CDkN0\n1kfa4vJCZmdv/CbijqxqRKXaQWgoCl8uzRU+6pA0+TyTYAZ2Gk1b4e9GYXQZ9cbK\naK44LMECgYEA8M1+YNkHjOWmCU4Z8+by8oUOJK6z+i6zyhXkfd43Bou9+KNd12pA\nBgbY/YK0VV/f8qUQS0ddWMWLQKg8s/ZYrN4iL5mN9FHUxI94WJ/ECyt+LcdGubOM\nL0Ib8lKmGxym4Xcca9yHGpU19BiMsCGZvNG0z+I2sftbuCU9C2pH4/sCgYEA3Rza\nREercMe8Yxig5MmKJIbRm2BTFBXGeyX0lRHiZixvzm9T/iJeLEiPwMMJ6ou5YEX0\ne3g1dVeJjXGF4NEV1YcuNSDRFvs66/sXMR4Gwrcw54KbY6qNdg02zevQKUcfKY0j\n6DlsWfgdsldecWmaOFosLrpmkWFULkGkm0Nfh3kCgYBcJdcByqt4AH18PBX0XuGD\nauVRpkUbLPoCEESi4gFekOU+m42SnIcphz9MK9NEhG7XlNDabdHL4bR7JqYsG84t\nQMgGPRW0dAgeu+RKzcCgoaEkdYicEZhIkVzOa1BDOcCmsQUARaCxzH2cDjTwRbtm\nJT2y+5cAnvanTiDBGIewNwKBgCR0XlQFkPFuLNQVumkeBUWSaLp6PhhAotGo51Mw\neKgpyWE6n5l1pxsb939raJYf5TdHMVCt9/pZrVcBkXYIYtYqjGa7+10TnJpNcnxp\nm+m8dDanJOFgvCPrd86pg09a53tdRr9BwGhw7Mx7dRmztHZ3/3LQzppHdq6Nqgrj\nJ7vZAoGBAKl9YnY5B7RfcHMTvyZ8uEjpxtS/U0qFOcQNdqC5TgTZKPhUjkL52FCa\nabckl9wbgZDCl1t5Q6LauBi9a4eLP1v1ZSnXTMh7LKbBpjZrXPbjITxLypu+ZWEA\nGvkfuTAdF5QY6UClsb1FE5de1oR+0mlizoDRnMxOmKMeNBIZps9J\n-----END RSA PRIVATE KEY-----\n"
         ssl_cert: "-----BEGIN CERTIFICATE-----\nMIIDBjCCAe4CCQCbgv1vQnKrZzANBgkqhkiG9w0BAQUFADBFMQswCQYDVQQGEwJB\nVTETMBEGA1UECBMKU29tZS1TdGF0ZTEhMB8GA1UEChMYSW50ZXJuZXQgV2lkZ2l0\ncyBQdHkgTHRkMB4XDTE1MTIxMDEzMjcyMloXDTE2MTIwOTEzMjcyMlowRTELMAkG\nA1UEBhMCQVUxEzARBgNVBAgTClNvbWUtU3RhdGUxITAfBgNVBAoTGEludGVybmV0\nIFdpZGdpdHMgUHR5IEx0ZDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB\nAM/8ieKlkY1lzI75oWSng7n+2FGc8hIMU7U9evv3XpSMYIXC4zAD5TJr7IhxAtf0\nnnGosNZHN/Y4qFAyulASyy2ixmgz0iq1mvEyuTk3aXMFfOC2F9BuO6tTg3hLgO1M\n70XNfh42UAsrQVP02aQvbgOFFs4FBbKh2MsTq8S4OMHxz/UItqvkMUiylcLRCNdG\nyoWlOnCQ9vkry3NwQDDe9u37BdwMwkoruiEtFn0AeB10MJLjpyBUJqxdn+sHySnk\naVzHabiyuAvQsJBsqd2PWHnhceaMjZD6SGg9ntwa4jUEyzOm2ooa9UvR8fU6wfU1\nyXoDw3YkslfUtSb1wnBZHqMCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAUA6Z3fWY\nr5XYZArnrWoh5AC+jnEsqfPtNTJRI2VKbNzXoujuGoyG7+5AcciUukeEwVMjmvbi\nCBZ9IzwPU1TwrJsVGSF0trrLkB7v4iegRf/HPTyfEWBZPW4ezZhyW+XmmViB51Do\n5GKqfPimwGsXghavQidP7hsZ58zQs76a5BdoCeBa7Y92QO6CtJsxXHzwlrwBTZHU\nKcEdxC66c6yq8pv9k9bxD1m3NeZPx6yEA9Z/h8aur6FdzKa4IW1g/gcdpJrTO5zs\nmW+R4oKDAQqj4o/8uBvrF96W732fak36G/Q2tQIaO89VN9jl3fnodOs4kT6CoGGz\nGwZp3wg8Zkq22Q==\n-----END CERTIFICATE-----\n"

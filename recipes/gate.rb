@@ -1,3 +1,4 @@
+include_recipe 'apt'
 package 'nginx'
 
 #user 'www-data' do
@@ -35,7 +36,9 @@ end
 # Create proxy with HTTP authentication via Nginx
 template "/etc/nginx/conf.d/elasticsearch_proxy.conf" do
   source "elasticsearch_proxy.conf.erb"
-  owner 'www-data' and group 'www-data' and mode 0755
+  owner 'www-data'
+  group 'www-data'
+  mode 0755
   notifies :reload, 'service[nginx]'
 end
 
@@ -43,17 +46,16 @@ ruby_block "add users to passwords file" do
   block do
     require 'webrick/httpauth/htpasswd'
     @htpasswd = WEBrick::HTTPAuth::Htpasswd.new('/etc/nginx/htpasswd')
-
-    Chef::Log.debug "Adding user '#{node.issue.user}' to #{node.issue.pass}\n"
-    @htpasswd.set_passwd( 'Elasticsearch', node.issue.user, node.issue.pass )
-
+    @htpasswd.set_passwd( 'Elasticsearch', node.idata.user, node.idata.pass )
     @htpasswd.flush
   end
 end
 
 # Ensure proper permissions and existence of the passwords file
 file '/etc/nginx/htpasswd' do
-  owner 'www-data' and group 'www-data' and mode 0755
+  owner 'www-data'
+  group 'www-data'
+  mode 0755
   action :touch
 end
 
@@ -67,12 +69,12 @@ file '/etc/nginx/ssl/es.issue.by.pem' do
   owner 'www-data'
   group  'www-data'
   mode '0440'
-  content node.issue.ssl_key
+  content node.idata.ssl_key
 end
 
 file '/etc/nginx/ssl/es.issue.by.crt' do
   owner 'www-data'
   group  'www-data'
   mode '0440'
-  content node.issue.ssl_cert
+  content node.idata.ssl_cert
 end

@@ -43,8 +43,8 @@ server {
     }
 
     # Pass requests to ElasticSearch Monitor
-    rewrite    /monitor(.*)  /$1  break;
-    proxy_pass <%= @monitor_url %>;
+    rewrite    /monitor(.*)  $1  break;
+    proxy_pass <%= @monitor_url.sub(%{/?$}, '/') %>;
     proxy_redirect off;
 
     proxy_set_header  X-Real-IP  $remote_addr;

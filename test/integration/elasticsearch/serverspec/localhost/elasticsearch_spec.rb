@@ -51,9 +51,11 @@ describe 'Elasticsearch' do
 
   # cluster settings: discovery, CORS, data & log mount point
   describe command('curl localhost:9200/_nodes') do
-    let(:settings) do
-      hash = JSON.parse(subject.stdout)
-      hash['nodes'].values.first['settings']
+    let(:hash) { JSON.parse(subject.stdout) }
+    let(:settings) { hash['nodes'].values.first['settings'] }
+
+    it 'has elasticsearch as cluster name' do
+      expect(hash['cluster_name']).to eq 'issue-elasticsearch'
     end
 
     it 'clusters within elasticsearch group' do
@@ -91,10 +93,10 @@ describe 'Elasticsearch' do
     it { should be_file }
 
     # exports node stats to monitoring cluster
-    its(:content) { should match %r{marvel.agent.exporter.es.hosts:\s+https://bam:bam@es-mon:9200} }
+    its(:content) { should match %r{marvel.agent.exporter.es.hosts:\s+http://localhost:9200/monitor} }
 
     # skips monitoring cluster hostname verification
-    its(:content) { should match %r{marvel.agent.exporter.es.ssl.hostname_verification:\s+false} }
+    #its(:content) { should match %r{marvel.agent.exporter.es.ssl.hostname_verification:\s+false} }
 
     # exports node stats to monitoring cluster via https
     #its(:content) { }

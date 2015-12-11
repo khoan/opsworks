@@ -7,7 +7,6 @@ server {
   access_log  /var/log/nginx/elasticsearch.log;
 
   location / {
-
     # Deny Nodes Shutdown API
     if ($request_filename ~ "_shutdown") {
       return 403;
@@ -26,6 +25,39 @@ server {
     proxy_set_header  X-Real-IP  $remote_addr;
     proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header  Host $http_host;
+
+    # For CORS Ajax
+    proxy_pass_header Access-Control-Allow-Origin;
+    proxy_pass_header Access-Control-Allow-Methods;
+    proxy_pass_header Access-Control-Allow-Headers;
+    proxy_pass_header Access-Control-Allow-Credentials;
+
+    # Authorize access
+    auth_basic           "ElasticSearch";
+    auth_basic_user_file /etc/nginx/htpasswd;
+  }
+
+  location /monitor {
+    # Deny Nodes Shutdown API
+    if ($request_filename ~ "_shutdown") {
+      return 403;
+      break;
+    }
+
+    if ($request_filename ~ "_cluster") {
+      return 403;
+      break;
+    }
+
+    # Pass requests to ElasticSearch Monitor
+    rewrite    /monitor(.*)  /$1  break;
+    proxy_pass <%= node.issue.elasticsearch_monitoring_cluster %>;
+    proxy_redirect off;
+
+    proxy_set_header  X-Real-IP  $remote_addr;
+    proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header  Host $http_host;
+
 
     # For CORS Ajax
     proxy_pass_header Access-Control-Allow-Origin;

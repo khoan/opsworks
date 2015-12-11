@@ -31,6 +31,30 @@ http://docs.aws.amazon.com/opsworks/latest/userguide/best-practices-packaging-co
 1. berks package
 1. aws s3 cp cookbook* s3://bucket
 
+## Customization
+
+Tailor custom.json to your setup
+
+    {
+      idata: {
+        user: ubam
+        pass: pbam
+        aws_access_key: a1234
+        aws_secret_key: s5678
+        monitor_url: "http://monitor.com:9200"
+        ssl_key: "-----BEGIN RSA PRIVATE KEY-----\ninsert key content\n-----END RSA PRIVATE KEY-----\n"
+        ssl_cert: "-----BEGIN CERTIFICATE-----\ninsert cert content\n-----END CERTIFICATE-----\n"
+      }
+    }
+
+## Proxy
+
+    # access elasticsearch via HTTP Basic Auth
+    curl https://ubam:pbam@localhost
+
+    # access monitor via HTTP Basic Auth
+    curl https://ubam:pbam@localhost/monitor
+
 ## SSL generator
 
 - http://www.selfsignedcertificate.com

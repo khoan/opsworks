@@ -13,38 +13,13 @@ server {
       break;
     }
 
-    if ($request_filename ~ "_cluster") {
-      return 403;
-      break;
-    }
+    #if ($request_filename ~ "_cluster") {
+    #  return 403;
+    #  break;
+    #}
 
     # Pass requests to ElasticSearch
     proxy_pass http://localhost:9200/;
-    proxy_redirect off;
-
-    proxy_set_header  X-Real-IP  $remote_addr;
-    proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header  Host $http_host;
-
-    include <%= @cors_path %>;
-    include <%= @auth_path %>;
-  }
-
-  location /monitor {
-    # Deny Nodes Shutdown API
-    if ($request_filename ~ "_shutdown") {
-      return 403;
-      break;
-    }
-
-    if ($request_filename ~ "_cluster") {
-      return 403;
-      break;
-    }
-
-    # Pass requests to ElasticSearch Monitor
-    rewrite    /monitor(.*)  $1  break;
-    proxy_pass <%= @monitor_url.sub(%{/?$}, '/') %>;
     proxy_redirect off;
 
     proxy_set_header  X-Real-IP  $remote_addr;

@@ -25,11 +25,15 @@ elasticsearch_configure 'elasticsearch' do
     'http.cors.allow-headers' => 'X-Requested-With, Content-Type, Content-Length, Authorization',
     'http.cors.allow-credentials' => true,
 
-    'discover.type' => 'ec2',
+    'plugin.mandatory' => 'cloud-aws',
+
     'cloud.aws.access_key' => node.idata.aws_secret_key,
     'cloud.aws.secret_key' => node.idata.aws_secret_key,
-    'cloud.ec2.security_group' => 'elasticsearch',
-    #'cloud.ec2.groups' => 'elasticsearch',
+
+    'discovery.type' => 'ec2',
+    'discovery.zen.ping.multicast.enabled' => false,
+    'discovery.ec2.groups' => 'elasticsearch',
+    #'discovery.ec2.tag.my_tag' => 'my_tag_value',
 
     'marvel.agent.exporter.es.hosts' => node.idata.monitor_url,
   )
